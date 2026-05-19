@@ -4,7 +4,6 @@ import { Hero } from "@/components/sections/Hero"
 import { Tours } from "@/components/sections/Tours"
 import { Safaris } from "@/components/sections/Safaris"
 import { WaterSports } from "@/components/sections/WaterSports"
-import { AIConcierge } from "@/components/sections/AIConcierge"
 import { Stats } from "@/components/sections/Stats"
 import { Gallery } from "@/components/sections/Gallery"
 import { Testimonials } from "@/components/sections/Testimonials"
@@ -21,7 +20,6 @@ export default function Home() {
       <Stats />
       <Safaris />
       <WaterSports />
-      <AIConcierge />
       <Gallery />
       <Testimonials />
       <Contact />

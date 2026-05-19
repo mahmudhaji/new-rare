@@ -15,7 +15,6 @@ const navLinks = [
   { name: "Zanzibar Tours", href: "/tours" },
   { name: "Safaris", href: "/safaris" },
   { name: "Water Sports", href: "/water-sports" },
-  { name: "AI Concierge", href: "/ai-concierge" },
   { name: "Gallery", href: "/gallery" },
   { name: "Contact", href: "/contact" },
 ]
