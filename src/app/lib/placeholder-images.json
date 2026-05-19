@@ -1,0 +1,65 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-video-fallback",
+      "description": "Zanzibar beach aerial view",
+      "imageUrl": "https://picsum.photos/seed/zanzibar-beach/1920/1080",
+      "imageHint": "Zanzibar beach"
+    },
+    {
+      "id": "stone-town",
+      "description": "Stone Town architecture",
+      "imageUrl": "https://picsum.photos/seed/stonetown/600/400",
+      "imageHint": "Stone Town"
+    },
+    {
+      "id": "prison-island",
+      "description": "Giant tortoise on Prison Island",
+      "imageUrl": "https://picsum.photos/seed/prisonisland/600/400",
+      "imageHint": "Prison Island"
+    },
+    {
+      "id": "jozani-forest",
+      "description": "Red Colobus Monkey in Jozani",
+      "imageUrl": "https://picsum.photos/seed/jozani/600/400",
+      "imageHint": "Jozani Forest"
+    },
+    {
+      "id": "serengeti",
+      "description": "Lion in Serengeti",
+      "imageUrl": "https://picsum.photos/seed/serengeti/600/400",
+      "imageHint": "Serengeti Safari"
+    },
+    {
+      "id": "ngorongoro",
+      "description": "Ngorongoro crater floor",
+      "imageUrl": "https://picsum.photos/seed/ngorongoro/600/400",
+      "imageHint": "Ngorongoro Crater"
+    },
+    {
+      "id": "kitesurfing",
+      "description": "Kitesurfing in Paje",
+      "imageUrl": "https://picsum.photos/seed/kite/600/400",
+      "imageHint": "Kitesurfing Zanzibar"
+    },
+    {
+      "id": "scuba",
+      "description": "Scuba diving in Mnemba",
+      "imageUrl": "https://picsum.photos/seed/scuba/600/400",
+      "imageHint": "Scuba Diving"
+    },
+    {
+      "id": "safari-wildlife",
+      "description": "Elephants in Tarangire",
+      "imageUrl": "https://picsum.photos/seed/elephant/800/600",
+      "imageHint": "Safari Wildlife"
+    },
+    {
+      "id": "zanzibar-sunset",
+      "description": "Dhow boat sunset",
+      "imageUrl": "https://picsum.photos/seed/sunset/800/600",
+      "imageHint": "Zanzibar Sunset"
+    }
+  ]
+}
