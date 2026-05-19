@@ -8,10 +8,22 @@
       "imageHint": "logo zanzibar"
     },
     {
-      "id": "hero-video-fallback",
+      "id": "hero-1",
       "description": "Zanzibar beach aerial view",
       "imageUrl": "https://picsum.photos/seed/zanzibar-beach/1920/1080",
       "imageHint": "Zanzibar beach"
+    },
+    {
+      "id": "hero-2",
+      "description": "Safari wildlife in Serengeti",
+      "imageUrl": "https://picsum.photos/seed/serengeti/1920/1080",
+      "imageHint": "Serengeti safari"
+    },
+    {
+      "id": "hero-3",
+      "description": "Kitesurfing in Paje",
+      "imageUrl": "https://picsum.photos/seed/kite/1920/1080",
+      "imageHint": "Kitesurfing Zanzibar"
     },
     {
       "id": "stone-town",

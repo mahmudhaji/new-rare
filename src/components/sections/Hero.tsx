@@ -1,25 +1,52 @@
 
 "use client"
 
-import { motion } from "framer-motion"
+import * as React from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
+import Image from "next/image"
+import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 export function Hero() {
+  const [index, setIndex] = React.useState(0)
+  const heroImages = PlaceHolderImages.filter(img => img.id.startsWith("hero-")).sort((a, b) => a.id.localeCompare(b.id))
+
+  React.useEffect(() => {
+    if (heroImages.length === 0) return
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % heroImages.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [heroImages.length])
+
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Background Video */}
+      {/* Background Image Slider */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-top-view-of-a-beautiful-beach-with-turquoise-water-11756-large.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/50" />
+        <AnimatePresence mode="wait">
+          {heroImages.length > 0 && (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={heroImages[index].imageUrl}
+                alt={heroImages[index].description}
+                fill
+                priority
+                className="object-cover"
+                data-ai-hint={heroImages[index].imageHint}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
