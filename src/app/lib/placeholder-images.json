@@ -44,6 +44,18 @@
       "imageHint": "Ngorongoro Crater"
     },
     {
+      "id": "mikumi",
+      "description": "Giraffes in Mikumi National Park",
+      "imageUrl": "https://picsum.photos/seed/mikumi/800/600",
+      "imageHint": "Mikumi Safari"
+    },
+    {
+      "id": "selous",
+      "description": "River view in Selous Game Reserve",
+      "imageUrl": "https://picsum.photos/seed/selous/800/600",
+      "imageHint": "Selous Safari"
+    },
+    {
       "id": "kitesurfing",
       "description": "Kitesurfing in Paje",
       "imageUrl": "https://picsum.photos/seed/kite/800/600",
