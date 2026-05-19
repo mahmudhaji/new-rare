@@ -26,9 +26,39 @@
       "imageHint": "Kitesurfing Zanzibar"
     },
     {
+      "id": "safari-blue",
+      "description": "Safari Blue boat trip",
+      "imageUrl": "https://picsum.photos/seed/safariblue/600/800",
+      "imageHint": "Zanzibar boat"
+    },
+    {
+      "id": "nakupenda",
+      "description": "Nakupenda sandbank",
+      "imageUrl": "https://picsum.photos/seed/nakupenda/600/800",
+      "imageHint": "Zanzibar sandbank"
+    },
+    {
+      "id": "dolphin-tour",
+      "description": "Dolphins in Zanzibar",
+      "imageUrl": "https://picsum.photos/seed/dolphin/600/800",
+      "imageHint": "Dolphin Zanzibar"
+    },
+    {
+      "id": "sunset-dhow",
+      "description": "Sunset Dhow Cruise",
+      "imageUrl": "https://picsum.photos/seed/sunset/600/800",
+      "imageHint": "Sunset Dhow"
+    },
+    {
+      "id": "aquarium",
+      "description": "Baraka Natural Aquarium turtles",
+      "imageUrl": "https://picsum.photos/seed/aquarium/600/800",
+      "imageHint": "Sea turtle"
+    },
+    {
       "id": "stone-town",
       "description": "Stone Town architecture",
-      "imageUrl": "https://picsum.photos/seed/stonetown/600/400",
+      "imageUrl": "https://picsum.photos/seed/stonetown/600/800",
       "imageHint": "Stone Town"
     },
     {
