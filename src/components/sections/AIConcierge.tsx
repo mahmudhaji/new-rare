@@ -47,10 +47,6 @@ export function AIConcierge() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
           >
-            <div className="flex items-center gap-2 mb-6">
-              <Sparkles className="h-6 w-6 text-accent" />
-              <span className="text-accent font-black uppercase tracking-[0.2em] text-sm">AI Adventure Concierge</span>
-            </div>
             <h2 className="font-headline text-5xl md:text-6xl mb-6 leading-tight">
               Let AI Craft Your <span className="text-primary italic">Dream Escape</span>
             </h2>
