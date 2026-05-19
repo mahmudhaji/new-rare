@@ -10,42 +10,36 @@ const tours = [
   {
     title: "Safari Blue",
     desc: "The ultimate sea adventure. Explore Menai Bay, snorkel in crystal waters, and enjoy a fresh seafood lunch.",
-    price: "$80",
     time: "Full Day",
     img: "https://picsum.photos/seed/safariblue/600/800",
   },
   {
     title: "Nakupenda Island",
     desc: "Visit the stunning sandbank known as 'I Love You' island. Pure white sand surrounded by turquoise ocean.",
-    price: "$60",
     time: "6 Hours",
     img: "https://picsum.photos/seed/nakupenda/600/800",
   },
   {
     title: "Dolphin Tour",
     desc: "An unforgettable experience swimming with wild dolphins in their natural habitat at Kizimkazi or Mnemba.",
-    price: "$55",
     time: "4 Hours",
     img: "https://picsum.photos/seed/dolphin/600/800",
   },
   {
     title: "Sunset Dhow Cruise",
     desc: "A magical evening on a traditional Zanzibar dhow, enjoying music and drinks as the sun sets over the horizon.",
-    price: "$45",
     time: "3 Hours",
     img: "https://picsum.photos/seed/sunset/600/800",
   },
   {
     title: "Baraka Aquarium",
     desc: "A unique natural lagoon where you can see, feed, and even swim with rescued sea turtles.",
-    price: "$30",
     time: "2 Hours",
     img: "https://picsum.photos/seed/aquarium/600/800",
   },
   {
     title: "Stone Town Tour",
     desc: "Walk through the historical labyrinth of the ancient island city and discover its rich culture.",
-    price: "$40",
     time: "3 Hours",
     img: "https://picsum.photos/seed/stone/600/800",
   },
@@ -102,11 +96,10 @@ export function Tours() {
                 
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span className="text-accent font-black text-2xl">{tour.price}</span>
-                    <span className="text-[10px] text-gray-400 uppercase tracking-tighter">Per Person</span>
+                    <span className="text-[10px] text-gray-400 uppercase tracking-tighter">Inquire for details</span>
                   </div>
                   <Button className="rounded-full px-6 bg-primary hover:bg-primary/90">
-                    Book Now
+                    Learn More
                   </Button>
                 </div>
               </div>

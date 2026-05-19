@@ -10,35 +10,30 @@ const safaris = [
   {
     title: "Serengeti National Park",
     type: "The Great Migration",
-    price: "From $1,200",
     img: "https://picsum.photos/seed/serengeti/1200/800",
     icon: <Compass className="h-5 w-5" />,
   },
   {
     title: "Ngorongoro Crater",
     type: "UNESCO World Heritage",
-    price: "From $950",
     img: "https://picsum.photos/seed/ngorongoro/1200/800",
     icon: <Tent className="h-5 w-5" />,
   },
   {
     title: "Mikumi National Park",
     type: "The mini-Serengeti",
-    price: "From $350",
     img: "https://picsum.photos/seed/mikumi/1200/800",
     icon: <Binoculars className="h-5 w-5" />,
   },
   {
     title: "Selous Game Reserve",
     type: "Wild & Untouched",
-    price: "From $850",
     img: "https://picsum.photos/seed/selous/1200/800",
     icon: <MapIcon className="h-5 w-5" />,
   },
   {
     title: "Tarangire Safari",
     type: "Elephant Paradise",
-    price: "From $450",
     img: "https://picsum.photos/seed/tarangire/1200/800",
     icon: <Tree className="h-5 w-5" />,
   },
@@ -98,7 +93,7 @@ export function Safaris() {
                 <span className="text-accent font-bold text-xs uppercase tracking-widest">{safari.type}</span>
                 <h3 className="font-headline text-2xl mt-2 mb-4">{safari.title}</h3>
                 <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
-                  <span className="font-black text-xl text-primary">{safari.price}</span>
+                  <span className="text-sm font-medium text-muted-foreground italic">Inquire for Luxury Package</span>
                   <Button variant="ghost" className="text-accent hover:text-accent/80 hover:bg-accent/5 p-0">
                     Learn More →
                   </Button>
