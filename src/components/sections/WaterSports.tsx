@@ -2,17 +2,19 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { Anchor, Zap, Search, Droplets, Wind, Fish } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 const sports = [
-  { name: "Kite Surfing", icon: <Wind />, color: "bg-blue-500", desc: "Ride the Paje winds." },
-  { name: "Jet Ski", icon: <Zap />, color: "bg-cyan-500", desc: "Feel the speed on waves." },
-  { name: "Snorkeling", icon: <Search />, color: "bg-teal-500", desc: "Explore coral reefs." },
-  { name: "Scuba Diving", icon: <Droplets />, color: "bg-indigo-500", desc: "Dive into the deep blue." },
-  { name: "Paddle Boarding", icon: <Anchor />, color: "bg-sky-500", desc: "Zen on the ocean surface." },
-  { name: "Deep Sea Fishing", icon: <Fish />, color: "bg-blue-700", desc: "The big catch awaits." },
+  { name: "Kite Surfing", icon: <Wind />, imageId: "kitesurfing", desc: "Ride the Paje winds." },
+  { name: "Jet Ski", icon: <Zap />, imageId: "jetski", desc: "Feel the speed on waves." },
+  { name: "Snorkeling", icon: <Search />, imageId: "snorkeling", desc: "Explore coral reefs." },
+  { name: "Scuba Diving", icon: <Droplets />, imageId: "scuba", desc: "Dive into the deep blue." },
+  { name: "Paddle Boarding", icon: <Anchor />, imageId: "paddle", desc: "Zen on the ocean surface." },
+  { name: "Deep Sea Fishing", icon: <Fish />, imageId: "fishing", desc: "The big catch awaits." },
 ]
 
 export function WaterSports() {
@@ -59,26 +61,37 @@ export function WaterSports() {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {sports.map((sport, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ y: -10 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              className="flex flex-col items-center text-center p-6 rounded-3xl bg-secondary/30 border border-border/50 group cursor-pointer transition-all hover:bg-primary/10 hover:border-primary/50"
-            >
-              <div className={cn(
-                "w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-all group-hover:scale-110 group-hover:rotate-12",
-                "bg-primary text-white"
-              )}>
-                {React.cloneElement(sport.icon as React.ReactElement, { className: "h-8 w-8" })}
-              </div>
-              <h4 className="font-bold text-sm mb-1">{sport.name}</h4>
-              <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{sport.desc}</p>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sports.map((sport, idx) => {
+            const sportImg = PlaceHolderImages.find(img => img.id === sport.imageId);
+            return (
+              <motion.div
+                key={idx}
+                whileHover={{ y: -10 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                className="group relative h-[400px] overflow-hidden rounded-[40px] shadow-2xl"
+              >
+                <Image 
+                  src={sportImg?.imageUrl || ""} 
+                  alt={sport.name} 
+                  fill 
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  data-ai-hint={sportImg?.imageHint}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                
+                <div className="absolute inset-0 flex flex-col justify-end p-8">
+                  <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center mb-4 transition-all group-hover:rotate-12">
+                    {React.cloneElement(sport.icon as React.ReactElement, { className: "h-7 w-7 text-white" })}
+                  </div>
+                  <h4 className="font-headline text-2xl text-white mb-2">{sport.name}</h4>
+                  <p className="text-gray-300 text-sm">{sport.desc}</p>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

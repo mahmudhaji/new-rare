@@ -17,7 +17,7 @@ export function Contact() {
       <div className="absolute -top-48 -right-48 w-96 h-96 bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -27,15 +27,12 @@ export function Contact() {
             <h2 className="font-headline text-5xl md:text-6xl mt-4 mb-8">
               Let's Plan Your <span className="text-primary italic">Next Adventure</span>
             </h2>
-            <p className="text-muted-foreground text-lg mb-12">
-              Our travel specialists are ready to help you craft the perfect experience. Visit us in Paje or drop us a message anytime.
-            </p>
-
-            <div className="space-y-8">
+            
+            <div className="space-y-8 mb-12">
               {[
                 { icon: <Phone />, label: "Call Us", val: "+255 778 666 810", link: "tel:+255778666810" },
                 { icon: <Mail />, label: "Email Us", val: "adventure@rarezanzibar.com", link: "mailto:adventure@rarezanzibar.com" },
-                { icon: <MapPin />, label: "Location", val: "Paje East Coast, Zanzibar", link: "#" },
+                { icon: <MapPin />, label: "Location", val: "Paje East Coast, Zanzibar", link: "https://goo.gl/maps/XYZ123" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-6 group">
                   <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
@@ -43,16 +40,23 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">{item.label}</p>
-                    <a href={item.link} className="text-xl font-bold hover:text-accent transition-colors">{item.val}</a>
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-accent transition-colors">{item.val}</a>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 flex gap-4">
-              <Button onClick={() => window.open('https://wa.me/255778666810')} className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full px-8 h-12 flex gap-2">
-                <MessageSquare className="h-5 w-5" /> Chat on WhatsApp
-              </Button>
+            {/* Google Maps Embed */}
+            <div className="w-full h-[300px] rounded-[40px] overflow-hidden shadow-2xl border border-white/10">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15871.494794828135!2d39.5229679!3d-6.2730691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185cd493c4a242a3%3A0x7a3a91010376d29!2sPaje!5e0!3m2!1sen!2stz!4v1709564242851!5m2!1sen!2stz" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={true} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </motion.div>
 

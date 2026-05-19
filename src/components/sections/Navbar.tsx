@@ -3,24 +3,28 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Menu, X, Waves } from "lucide-react"
+import Image from "next/image"
+import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 const navLinks = [
-  { name: "Home", href: "#hero" },
-  { name: "Zanzibar Tours", href: "#zanzibar-tours" },
-  { name: "Safaris", href: "#safaris" },
-  { name: "Water Sports", href: "#water-sports" },
-  { name: "AI Concierge", href: "#ai-concierge" },
-  { name: "Gallery", href: "#gallery" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "Zanzibar Tours", href: "/tours" },
+  { name: "Safaris", href: "/safaris" },
+  { name: "Water Sports", href: "/water-sports" },
+  { name: "AI Concierge", href: "/ai-concierge" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Contact", href: "/contact" },
 ]
 
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false)
   const [isScrolled, setIsScrolled] = React.useState(false)
+
+  const logoImg = PlaceHolderImages.find(img => img.id === "logo")
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -38,8 +42,16 @@ export function Navbar() {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <Waves className="h-8 w-8 text-accent group-hover:rotate-12 transition-transform" />
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-accent/50 group-hover:rotate-12 transition-transform">
+            <Image 
+              src={logoImg?.imageUrl || "/logo-placeholder.png"} 
+              alt="Rare Zanzibar" 
+              fill 
+              className="object-cover"
+              data-ai-hint="logo zanzibar"
+            />
+          </div>
           <span className="font-headline text-xl md:text-2xl font-bold tracking-tight text-foreground">
             RARE <span className="text-accent">ZANZIBAR</span>
           </span>

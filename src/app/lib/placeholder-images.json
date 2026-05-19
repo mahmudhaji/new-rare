@@ -2,6 +2,12 @@
 {
   "placeholderImages": [
     {
+      "id": "logo",
+      "description": "Rare Zanzibar Logo",
+      "imageUrl": "https://picsum.photos/seed/rarelogo/200/200",
+      "imageHint": "logo zanzibar"
+    },
+    {
       "id": "hero-video-fallback",
       "description": "Zanzibar beach aerial view",
       "imageUrl": "https://picsum.photos/seed/zanzibar-beach/1920/1080",
@@ -40,14 +46,38 @@
     {
       "id": "kitesurfing",
       "description": "Kitesurfing in Paje",
-      "imageUrl": "https://picsum.photos/seed/kite/600/400",
+      "imageUrl": "https://picsum.photos/seed/kite/800/600",
       "imageHint": "Kitesurfing Zanzibar"
+    },
+    {
+      "id": "jetski",
+      "description": "Jet ski riding",
+      "imageUrl": "https://picsum.photos/seed/jetski/800/600",
+      "imageHint": "Jet Ski"
     },
     {
       "id": "scuba",
       "description": "Scuba diving in Mnemba",
-      "imageUrl": "https://picsum.photos/seed/scuba/600/400",
+      "imageUrl": "https://picsum.photos/seed/scuba/800/600",
       "imageHint": "Scuba Diving"
+    },
+    {
+      "id": "snorkeling",
+      "description": "Snorkeling in turquoise water",
+      "imageUrl": "https://picsum.photos/seed/snorkeling/800/600",
+      "imageHint": "Snorkeling"
+    },
+    {
+      "id": "paddle",
+      "description": "Paddle boarding at sunset",
+      "imageUrl": "https://picsum.photos/seed/paddle/800/600",
+      "imageHint": "Paddle Boarding"
+    },
+    {
+      "id": "fishing",
+      "description": "Deep sea fishing catch",
+      "imageUrl": "https://picsum.photos/seed/fishing/800/600",
+      "imageHint": "Deep Sea Fishing"
     },
     {
       "id": "safari-wildlife",
