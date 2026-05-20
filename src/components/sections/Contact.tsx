@@ -3,13 +3,57 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Phone, Mail, MapPin, MessageSquare, Send } from "lucide-react"
+import { Phone, Mail, MapPin, Send, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useToast } from "@/hooks/use-toast"
 
 export function Contact() {
+  const { toast } = useToast()
+  const [quiz, setQuiz] = React.useState({ num1: 0, num2: 0, sum: 0 })
+  const [userAnswer, setUserAnswer] = React.useState("")
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+
+  // Generate a new math quiz on mount to avoid hydration mismatch
+  React.useEffect(() => {
+    generateQuiz()
+  }, [])
+
+  function generateQuiz() {
+    const n1 = Math.floor(Math.random() * 10) + 1
+    const n2 = Math.floor(Math.random() * 10) + 1
+    setQuiz({ num1: n1, num2: n2, sum: n1 + n2 })
+    setUserAnswer("")
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    
+    if (parseInt(userAnswer) !== quiz.sum) {
+      toast({
+        variant: "destructive",
+        title: "Security Check Failed",
+        description: "Please solve the math puzzle correctly to prove you are human.",
+      })
+      return
+    }
+
+    setIsSubmitting(true)
+    // Simulate API call
+    setTimeout(() => {
+      toast({
+        title: "Message Sent!",
+        description: "We've received your request and will get back to you shortly.",
+      })
+      setIsSubmitting(false)
+      generateQuiz()
+      const form = e.target as HTMLFormElement
+      form.reset()
+    }, 1500)
+  }
+
   return (
     <section id="contact" className="py-24 px-6 bg-background relative overflow-hidden">
       {/* Visual background element */}
@@ -67,21 +111,21 @@ export function Contact() {
             className="p-1 w-full"
           >
             <div className="glass p-8 md:p-12 rounded-[40px] shadow-2xl border border-white/10">
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase ml-1">Full Name</label>
-                    <Input placeholder="John Doe" className="bg-white/5 border-white/10 rounded-xl h-12 focus:ring-accent" />
+                    <Input required placeholder="John Doe" className="bg-white/5 border-white/10 rounded-xl h-12 focus:ring-accent" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase ml-1">Email Address</label>
-                    <Input type="email" placeholder="john@example.com" className="bg-white/5 border-white/10 rounded-xl h-12 focus:ring-accent" />
+                    <Input required type="email" placeholder="john@example.com" className="bg-white/5 border-white/10 rounded-xl h-12 focus:ring-accent" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase ml-1">Tour Interest</label>
-                  <Select>
+                  <Select required>
                     <SelectTrigger className="bg-white/5 border-white/10 rounded-xl h-12">
                       <SelectValue placeholder="What are you interested in?" />
                     </SelectTrigger>
@@ -96,11 +140,39 @@ export function Contact() {
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase ml-1">Your Message</label>
-                  <Textarea placeholder="Tell us about your dream trip..." className="bg-white/5 border-white/10 rounded-xl min-h-[150px] focus:ring-accent" />
+                  <Textarea required placeholder="Tell us about your dream trip..." className="bg-white/5 border-white/10 rounded-xl min-h-[150px] focus:ring-accent" />
                 </div>
 
-                <Button className="w-full h-14 bg-accent hover:bg-accent/90 text-background font-bold rounded-xl text-lg shadow-xl shadow-accent/20">
-                  <Send className="mr-2 h-5 w-5" /> Send Message
+                {/* Robot Check Quiz */}
+                <div className="space-y-3 p-6 bg-accent/5 rounded-2xl border border-accent/20">
+                  <div className="flex items-center gap-2 mb-1">
+                    <ShieldCheck className="h-4 w-4 text-accent" />
+                    <label className="text-xs font-bold uppercase">Security Quiz (Are you human?)</label>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="text-lg font-bold bg-white/10 px-4 py-2 rounded-lg border border-white/10">
+                      {quiz.num1} + {quiz.num2} = ?
+                    </div>
+                    <Input 
+                      type="number" 
+                      required
+                      value={userAnswer}
+                      onChange={(e) => setUserAnswer(e.target.value)}
+                      placeholder="Answer" 
+                      className="bg-white/5 border-white/10 rounded-xl h-12 w-24 text-center focus:ring-accent" 
+                    />
+                  </div>
+                </div>
+
+                <Button 
+                  disabled={isSubmitting}
+                  className="w-full h-14 bg-accent hover:bg-accent/90 text-background font-bold rounded-xl text-lg shadow-xl shadow-accent/20 transition-all disabled:opacity-50"
+                >
+                  {isSubmitting ? "Sending..." : (
+                    <>
+                      <Send className="mr-2 h-5 w-5" /> Send Message
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
