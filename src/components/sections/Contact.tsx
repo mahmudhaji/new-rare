@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -72,8 +71,8 @@ export function Contact() {
 
       if (result.success) {
         toast({
-          title: "Booking Request Sent!",
-          description: `We've sent a confirmation to ${values.email}. Our team will follow up shortly!`,
+          title: "Booking Success!",
+          description: `A confirmation email has been sent to ${values.email}. We'll be in touch!`,
         })
         form.reset()
         generateQuiz()
