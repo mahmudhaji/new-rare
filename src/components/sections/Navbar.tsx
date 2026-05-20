@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -44,7 +43,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-accent/50 group-hover:rotate-12 transition-transform">
             <Image 
-              src={logoImg?.imageUrl || "/logo-placeholder.png"} 
+              src={logoImg?.imageUrl || "https://picsum.photos/seed/rarelogo/200/200"} 
               alt="Rare Zanzibar" 
               fill 
               className="object-cover"
@@ -67,9 +66,11 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
-          <Button variant="default" className="bg-primary hover:bg-primary/90 rounded-full px-6">
-            Book Now
-          </Button>
+          <Link href="/contact">
+            <Button variant="default" className="bg-primary hover:bg-primary/90 rounded-full px-6">
+              Book Now
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -102,7 +103,9 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Button className="w-full bg-primary mt-4">Book Now</Button>
+              <Link href="/contact" onClick={() => setIsOpen(false)}>
+                <Button className="w-full bg-primary mt-4">Book Now</Button>
+              </Link>
             </div>
           </motion.div>
         )}
