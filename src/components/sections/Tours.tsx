@@ -5,41 +5,48 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { MapPin, Clock, Star } from "lucide-react"
+import Link from "next/link"
 
-const tours = [
+export const tourData = [
   {
+    id: "safari-blue",
     title: "Safari Blue",
-    desc: "The ultimate sea adventure. Explore Menai Bay, snorkel in crystal waters, and enjoy a fresh seafood lunch.",
+    desc: "The ultimate sea adventure. Explore Menai Bay, snorkel in crystal waters, and enjoy a fresh seafood lunch on a sandbank.",
     time: "Full Day",
     img: "https://picsum.photos/seed/safariblue/600/800",
   },
   {
+    id: "nakupenda",
     title: "Nakupenda Island",
     desc: "Visit the stunning sandbank known as 'I Love You' island. Pure white sand surrounded by turquoise ocean.",
     time: "6 Hours",
     img: "https://picsum.photos/seed/nakupenda/600/800",
   },
   {
+    id: "dolphin-tour",
     title: "Dolphin Tour",
-    desc: "An unforgettable experience swimming with wild dolphins in their natural habitat at Kizimkazi or Mnemba.",
+    desc: "An unforgettable experience swimming with wild dolphins in their natural habitat at Kizimkazi or Mnemba Atoll.",
     time: "4 Hours",
     img: "https://picsum.photos/seed/dolphin/600/800",
   },
   {
+    id: "sunset-dhow",
     title: "Sunset Dhow Cruise",
-    desc: "A magical evening on a traditional Zanzibar dhow, enjoying music and drinks as the sun sets over the horizon.",
+    desc: "A magical evening on a traditional Zanzibar dhow, enjoying music and drinks as the sun sets over the Indian Ocean.",
     time: "3 Hours",
     img: "https://picsum.photos/seed/sunset/600/800",
   },
   {
+    id: "aquarium",
     title: "Baraka Aquarium",
-    desc: "A unique natural lagoon where you can see, feed, and even swim with rescued sea turtles.",
+    desc: "A unique natural lagoon where you can see, feed, and even swim with rescued sea turtles in Nungwi.",
     time: "2 Hours",
     img: "https://picsum.photos/seed/aquarium/600/800",
   },
   {
+    id: "stone-town",
     title: "Stone Town Tour",
-    desc: "Walk through the historical labyrinth of the ancient island city and discover its rich culture.",
+    desc: "Walk through the historical labyrinth of the ancient island city and discover its rich Arabic and Swahili culture.",
     time: "3 Hours",
     img: "https://picsum.photos/seed/stone/600/800",
   },
@@ -70,7 +77,7 @@ export function Tours() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {tours.map((tour, idx) => (
+          {tourData.map((tour, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}
@@ -98,9 +105,11 @@ export function Tours() {
                   <div className="flex flex-col">
                     <span className="text-[10px] text-gray-400 uppercase tracking-tighter">Inquire for details</span>
                   </div>
-                  <Button className="rounded-full px-6 bg-primary hover:bg-primary/90">
-                    Learn More
-                  </Button>
+                  <Link href={`/tours/${tour.id}`}>
+                    <Button className="rounded-full px-6 bg-primary hover:bg-primary/90">
+                      Learn More
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
