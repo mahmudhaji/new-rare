@@ -1,22 +1,44 @@
+
 "use client"
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Phone, Mail, MapPin, Send, ShieldCheck } from "lucide-react"
+import { Phone, Mail, MapPin, Send, ShieldCheck, Loader2 } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { useToast } from "@/hooks/use-toast"
 import { handleContactSubmission } from "@/app/actions/contact-action"
+
+const contactFormSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  tour: z.string().min(1, { message: "Please select a tour interest." }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  securityAnswer: z.string().min(1, { message: "Security answer is required." }),
+})
 
 export function Contact() {
   const { toast } = useToast()
   const [quiz, setQuiz] = React.useState({ num1: 0, num2: 0, sum: 0 })
-  const [userAnswer, setUserAnswer] = React.useState("")
   const [isSubmitting, setIsSubmitting] = React.useState(false)
 
-  // Generate a new math quiz on mount to avoid hydration mismatch
+  const form = useForm<z.infer<typeof contactFormSchema>>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      tour: "",
+      message: "",
+      securityAnswer: "",
+    },
+  })
+
   React.useEffect(() => {
     generateQuiz()
   }, [])
@@ -25,40 +47,36 @@ export function Contact() {
     const n1 = Math.floor(Math.random() * 10) + 1
     const n2 = Math.floor(Math.random() * 10) + 1
     setQuiz({ num1: n1, num2: n2, sum: n1 + n2 })
-    setUserAnswer("")
+    form.setValue("securityAnswer", "")
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    
-    if (parseInt(userAnswer) !== quiz.sum) {
+  async function onSubmit(values: z.infer<typeof contactFormSchema>) {
+    if (parseInt(values.securityAnswer) !== quiz.sum) {
       toast({
         variant: "destructive",
         title: "Security Check Failed",
-        description: "Please solve the math puzzle correctly to prove you are human.",
+        description: "Please solve the math puzzle correctly.",
       })
       return
     }
 
     setIsSubmitting(true)
     
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      tour: formData.get('tour') as string,
-      message: formData.get('message') as string,
-    }
-
     try {
-      const result = await handleContactSubmission(data);
+      const result = await handleContactSubmission({
+        name: values.name,
+        email: values.email,
+        tour: values.tour,
+        message: values.message,
+      });
+
       if (result.success) {
         toast({
-          title: "Message Sent!",
-          description: `A confirmation has been sent to ${data.email}. We will also notify our team at mahmudhaji2010@gmail.com`,
+          title: "Booking Request Sent!",
+          description: `We've sent a confirmation to ${values.email}. Our team will follow up shortly!`,
         })
+        form.reset()
         generateQuiz()
-        e.currentTarget.reset()
       }
     } catch (error) {
       toast({
@@ -126,69 +144,112 @@ export function Contact() {
             className="p-1 w-full"
           >
             <div className="glass p-8 md:p-12 rounded-[40px] shadow-2xl border border-white/10">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase ml-1">Full Name</label>
-                    <Input name="name" required placeholder="John Doe" className="bg-white/5 border-white/10 rounded-xl h-12 focus:ring-accent" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase ml-1">Email Address</label>
-                    <Input name="email" required type="email" placeholder="john@example.com" className="bg-white/5 border-white/10 rounded-xl h-12 focus:ring-accent" />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase ml-1">Tour Interest</label>
-                  <Select name="tour" required>
-                    <SelectTrigger className="bg-white/5 border-white/10 rounded-xl h-12">
-                      <SelectValue placeholder="What are you interested in?" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Zanzibar Tours">Zanzibar Tours</SelectItem>
-                      <SelectItem value="Tanzania Safaris">Tanzania Safaris</SelectItem>
-                      <SelectItem value="Water Sports">Water Sports</SelectItem>
-                      <SelectItem value="Full Expedition">Full Expedition</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase ml-1">Your Message</label>
-                  <Textarea name="message" required placeholder="Tell us about your dream trip..." className="bg-white/5 border-white/10 rounded-xl min-h-[150px] focus:ring-accent" />
-                </div>
-
-                <div className="space-y-3 p-6 bg-accent/5 rounded-2xl border border-accent/20">
-                  <div className="flex items-center gap-2 mb-1">
-                    <ShieldCheck className="h-4 w-4 text-accent" />
-                    <label className="text-xs font-bold uppercase">Security Quiz (Are you human?)</label>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-lg font-bold bg-white/10 px-4 py-2 rounded-lg border border-white/10">
-                      {quiz.num1} + {quiz.num2} = ?
-                    </div>
-                    <Input 
-                      type="number" 
-                      required
-                      value={userAnswer}
-                      onChange={(e) => setUserAnswer(e.target.value)}
-                      placeholder="Answer" 
-                      className="bg-white/5 border-white/10 rounded-xl h-12 w-24 text-center focus:ring-accent" 
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-xs font-bold uppercase">Full Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="John Doe" className="bg-white/5 border-white/10 rounded-xl h-12 focus:ring-accent" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-xs font-bold uppercase">Email Address</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="john@example.com" className="bg-white/5 border-white/10 rounded-xl h-12 focus:ring-accent" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
-                </div>
 
-                <Button 
-                  disabled={isSubmitting}
-                  className="w-full h-14 bg-accent hover:bg-accent/90 text-background font-bold rounded-xl text-lg shadow-xl shadow-accent/20 transition-all disabled:opacity-50"
-                >
-                  {isSubmitting ? "Sending..." : (
-                    <>
-                      <Send className="mr-2 h-5 w-5" /> Send Message
-                    </>
-                  )}
-                </Button>
-              </form>
+                  <FormField
+                    control={form.control}
+                    name="tour"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-xs font-bold uppercase">Tour Interest</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="bg-white/5 border-white/10 rounded-xl h-12">
+                              <SelectValue placeholder="What are you interested in?" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="Zanzibar Tours">Zanzibar Tours</SelectItem>
+                            <SelectItem value="Tanzania Safaris">Tanzania Safaris</SelectItem>
+                            <SelectItem value="Water Sports">Water Sports</SelectItem>
+                            <SelectItem value="Full Expedition">Full Expedition</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-xs font-bold uppercase">Your Message</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Tell us about your dream trip..." className="bg-white/5 border-white/10 rounded-xl min-h-[150px] focus:ring-accent" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="space-y-3 p-6 bg-accent/5 rounded-2xl border border-accent/20">
+                    <div className="flex items-center gap-2 mb-1">
+                      <ShieldCheck className="h-4 w-4 text-accent" />
+                      <label className="text-xs font-bold uppercase">Security Quiz (Are you human?)</label>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-lg font-bold bg-white/10 px-4 py-2 rounded-lg border border-white/10">
+                        {quiz.num1} + {quiz.num2} = ?
+                      </div>
+                      <FormField
+                        control={form.control}
+                        name="securityAnswer"
+                        render={({ field }) => (
+                          <FormItem className="flex-1">
+                            <FormControl>
+                              <Input type="number" placeholder="Answer" className="bg-white/5 border-white/10 rounded-xl h-12 text-center focus:ring-accent" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+
+                  <Button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full h-14 bg-accent hover:bg-accent/90 text-background font-bold rounded-xl text-lg shadow-xl shadow-accent/20 transition-all disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...</>
+                    ) : (
+                      <><Send className="mr-2 h-5 w-5" /> Send Booking Request</>
+                    )}
+                  </Button>
+                </form>
+              </Form>
             </div>
           </motion.div>
         </div>
