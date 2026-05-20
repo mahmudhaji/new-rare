@@ -71,8 +71,8 @@ export function Contact() {
 
       if (result.success) {
         toast({
-          title: "Booking Success!",
-          description: `A confirmation email has been sent to ${values.email}. We'll be in touch!`,
+          title: "Booking Received!",
+          description: `Mahmud has been notified. A confirmation was also sent to ${values.email}.`,
         })
         form.reset()
         generateQuiz()
@@ -81,7 +81,7 @@ export function Contact() {
       toast({
         variant: "destructive",
         title: "Submission Error",
-        description: "Something went wrong. Please try again or contact us via WhatsApp.",
+        description: "Something went wrong. Please try again or reach out on WhatsApp.",
       })
     } finally {
       setIsSubmitting(false)
@@ -108,7 +108,7 @@ export function Contact() {
             <div className="space-y-8 mb-12">
               {[
                 { icon: <Phone />, label: "Call Us", val: "+255 778 666 810", link: "tel:+255778666810" },
-                { icon: <Mail />, label: "Email Us", val: "adventure@rarezanzibar.com", link: "mailto:adventure@rarezanzibar.com" },
+                { icon: <Mail />, label: "Email Mahmud", val: "mahmudhaji2010@gmail.com", link: "mailto:mahmudhaji2010@gmail.com" },
                 { icon: <MapPin />, label: "Location", val: "Paje East Coast, Zanzibar", link: "https://goo.gl/maps/XYZ123" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-6 group">
@@ -215,7 +215,7 @@ export function Contact() {
                   <div className="space-y-3 p-6 bg-accent/5 rounded-2xl border border-accent/20">
                     <div className="flex items-center gap-2 mb-1">
                       <ShieldCheck className="h-4 w-4 text-accent" />
-                      <label className="text-xs font-bold uppercase">Security Quiz (Are you human?)</label>
+                      <label className="text-xs font-bold uppercase">Security Quiz (Robot Check)</label>
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="text-lg font-bold bg-white/10 px-4 py-2 rounded-lg border border-white/10">
