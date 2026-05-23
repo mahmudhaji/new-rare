@@ -1,4 +1,3 @@
-
 "use client"
 
 import Image from "next/image"
@@ -6,49 +5,15 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Compass, Tent, TreesIcon as Tree, Map as MapIcon, Binoculars } from "lucide-react"
 import Link from "next/link"
+import { safariData } from "@/lib/safaris-data"
 
-export const safariData = [
-  {
-    id: "serengeti",
-    title: "Serengeti National Park",
-    type: "The Great Migration",
-    img: "https://picsum.photos/seed/serengeti/1200/800",
-    icon: <Compass className="h-5 w-5" />,
-    desc: "Witness the legendary Great Migration across the endless plains of the Serengeti, home to the world's highest concentration of large mammals."
-  },
-  {
-    id: "ngorongoro",
-    title: "Ngorongoro Crater",
-    type: "UNESCO World Heritage",
-    img: "https://picsum.photos/seed/ngorongoro/1200/800",
-    icon: <Tent className="h-5 w-5" />,
-    desc: "Explore the world's largest inactive volcanic caldera, a self-contained paradise teeming with over 25,000 large animals including the rare black rhino."
-  },
-  {
-    id: "mikumi",
-    title: "Mikumi National Park",
-    type: "The mini-Serengeti",
-    img: "https://picsum.photos/seed/mikumi/1200/800",
-    icon: <Binoculars className="h-5 w-5" />,
-    desc: "Perfect for short escapes from Zanzibar, Mikumi offers spectacular sightings of lions, zebras, and giraffes in its Mkata Floodplain."
-  },
-  {
-    id: "selous",
-    title: "Selous Game Reserve",
-    type: "Wild & Untouched",
-    img: "https://picsum.photos/seed/selous/1200/800",
-    icon: <MapIcon className="h-5 w-5" />,
-    desc: "Discover one of Africa's largest and most rugged protected areas, famous for its boat safaris on the Rufiji River and wild dog populations."
-  },
-  {
-    id: "tarangire",
-    title: "Tarangire Safari",
-    type: "Elephant Paradise",
-    img: "https://picsum.photos/seed/tarangire/1200/800",
-    icon: <Tree className="h-5 w-5" />,
-    desc: "Known for its massive baobab trees and huge herds of elephants that congregate around the Tarangire River during the dry season."
-  },
-]
+const icons: Record<string, React.ReactNode> = {
+  serengeti: <Compass className="h-5 w-5" />,
+  ngorongoro: <Tent className="h-5 w-5" />,
+  mikumi: <Binoculars className="h-5 w-5" />,
+  selous: <MapIcon className="h-5 w-5" />,
+  tarangire: <Tree className="h-5 w-5" />,
+}
 
 export function Safaris() {
   return (
@@ -97,7 +62,7 @@ export function Safaris() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute top-4 right-4 bg-primary text-white p-3 rounded-2xl">
-                  {safari.icon}
+                  {icons[safari.id] || <Compass className="h-5 w-5" />}
                 </div>
               </div>
               <div className="p-8 flex flex-col flex-1">

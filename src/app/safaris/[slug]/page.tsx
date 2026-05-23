@@ -1,8 +1,8 @@
 import * as React from "react"
 import { Navbar } from "@/components/sections/Navbar"
 import { Footer } from "@/components/sections/Footer"
-import { safariData } from "@/components/sections/Safaris"
 import { SafariDetailView } from "@/components/sections/SafariDetailView"
+import { safariData } from "@/lib/safaris-data"
 
 export async function generateStaticParams() {
   return safariData.map((safari) => ({

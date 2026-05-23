@@ -1,8 +1,8 @@
 import * as React from "react"
 import { Navbar } from "@/components/sections/Navbar"
 import { Footer } from "@/components/sections/Footer"
-import { tourData } from "@/components/sections/Tours"
 import { TourDetailView } from "@/components/sections/TourDetailView"
+import { tourData } from "@/lib/tours-data"
 
 export async function generateStaticParams() {
   return tourData.map((tour) => ({
