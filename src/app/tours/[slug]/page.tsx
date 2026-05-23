@@ -1,10 +1,9 @@
-import * as React from "react"
-import { Navbar } from "@/components/sections/Navbar"
-import { Footer } from "@/components/sections/Footer"
 import { TourDetailView } from "@/components/sections/TourDetailView"
 import { tourData } from "@/lib/tours-data"
+import { Navbar } from "@/components/sections/Navbar"
+import { Footer } from "@/components/sections/Footer"
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return tourData.map((tour) => ({
     slug: tour.id,
   }))

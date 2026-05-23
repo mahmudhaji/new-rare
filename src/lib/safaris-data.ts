@@ -1,6 +1,3 @@
-import * as React from "react"
-import { Compass, Tent, TreesIcon as Tree, Map as MapIcon, Binoculars } from "lucide-react"
-
 export const safariData = [
   {
     id: "serengeti",

@@ -1,10 +1,9 @@
-import * as React from "react"
-import { Navbar } from "@/components/sections/Navbar"
-import { Footer } from "@/components/sections/Footer"
 import { SafariDetailView } from "@/components/sections/SafariDetailView"
 import { safariData } from "@/lib/safaris-data"
+import { Navbar } from "@/components/sections/Navbar"
+import { Footer } from "@/components/sections/Footer"
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return safariData.map((safari) => ({
     slug: safari.id,
   }))
