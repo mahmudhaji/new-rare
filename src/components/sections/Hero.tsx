@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import Image from "next/image"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
+import Link from "next/link"
 
 const captions = [
   {
@@ -46,17 +47,17 @@ export function Hero() {
           {heroImages.length > 0 && (
             <motion.div
               key={`bg-${index}`}
-              initial={{ opacity: 0, scale: 1.15 }}
+              initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
               className="absolute inset-0"
             >
               <Image
                 src={heroImages[index].imageUrl}
                 alt={heroImages[index].description}
                 fill
-                priority
+                priority={index === 0} // Only priority for first image to speed up load
                 className="object-cover"
                 data-ai-hint={heroImages[index].imageHint}
               />
@@ -90,12 +91,16 @@ export function Hero() {
               {captions[index]?.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-background font-bold px-10 h-14 rounded-full shadow-2xl transition-all hover:scale-105">
-                Book Your Adventure
-              </Button>
-              <Button size="lg" variant="outline" className="text-white border-white/40 hover:bg-white/10 px-10 h-14 rounded-full backdrop-blur-sm">
-                View Details
-              </Button>
+              <Link href="/contact">
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-background font-bold px-10 h-14 rounded-full shadow-2xl transition-all hover:scale-105">
+                  Book Your Adventure
+                </Button>
+              </Link>
+              <Link href="/tours">
+                <Button size="lg" variant="outline" className="text-white border-white/40 hover:bg-white/10 px-10 h-14 rounded-full backdrop-blur-sm">
+                  View Tours
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </AnimatePresence>

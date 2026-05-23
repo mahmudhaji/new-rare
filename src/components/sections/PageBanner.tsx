@@ -20,7 +20,7 @@ export function PageBanner({ title, subtitle, imageId }: PageBannerProps) {
         src={bannerImg?.imageUrl || "https://picsum.photos/seed/zanzibar-banner/1920/1080"}
         alt={title}
         fill
-        priority
+        priority={true} // Priority loading for fast LCP
         className="object-cover"
         data-ai-hint={bannerImg?.imageHint || "zanzibar beach"}
       />
