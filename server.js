@@ -5,6 +5,7 @@ const next = require('next')
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 3000
+// Next.js will automatically load next.config.ts and see distDir: 'out'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
