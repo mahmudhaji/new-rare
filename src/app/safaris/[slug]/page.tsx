@@ -4,13 +4,15 @@ import { Navbar } from "@/components/sections/Navbar"
 import { Footer } from "@/components/sections/Footer"
 
 export function generateStaticParams() {
+  // Ensure we are returning the correct shape for static generation
   return safariData.map((safari) => ({
     slug: safari.id,
   }))
 }
 
 export default async function SafariDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+  const resolvedParams = await params
+  const slug = resolvedParams.slug
   const safari = safariData.find((s) => s.id === slug)
 
   if (!safari) {
