@@ -12,9 +12,16 @@ import { motion } from "framer-motion"
 import { Star, Clock, MapPin, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+// In a static export, we define which paths to pre-render
+export async function generateStaticParams() {
+  return tourData.map((tour) => ({
+    slug: tour.id,
+  }))
+}
+
 export default function TourDetailPage() {
   const params = useParams()
-  const slug = params.slug as string
+  const slug = params?.slug as string
   const tour = tourData.find((t) => t.id === slug)
 
   if (!tour) {

@@ -12,9 +12,16 @@ import { motion } from "framer-motion"
 import { Binoculars, Compass, MapPin, CheckCircle2, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+// In a static export, we define which paths to pre-render
+export async function generateStaticParams() {
+  return safariData.map((safari) => ({
+    slug: safari.id,
+  }))
+}
+
 export default function SafariDetailPage() {
   const params = useParams()
-  const slug = params.slug as string
+  const slug = params?.slug as string
   const safari = safariData.find((s) => s.id === slug)
 
   if (!safari) {

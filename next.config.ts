@@ -2,15 +2,11 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  /* Redirect build output to 'out' folder */
-  distDir: 'out',
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  /* Enable static export */
+  output: 'export',
+  /* Images must be unoptimized for static export unless using a custom loader */
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -31,6 +27,12 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
